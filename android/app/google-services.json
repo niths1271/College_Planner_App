@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "767873505600",
+    "project_id": "college-planner-app-7c03e",
+    "storage_bucket": "college-planner-app-7c03e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:767873505600:android:e7fd0f8c225d084f3402a5",
+        "android_client_info": {
+          "package_name": "com.example.college_planner_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "767873505600-bvjktjijrd186s759roonhv5buh23qqb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyR32--Q97CrYMbNuwqp1-jGK4-vIkn3I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "767873505600-bvjktjijrd186s759roonhv5buh23qqb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
