@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:college_planner_app/utils/color.dart';
 import 'package:flutter/material.dart';
 
@@ -12,10 +13,11 @@ class HeaderContainer extends StatelessWidget {
       height: MediaQuery.of(context).size.height * 0.4,
       decoration: BoxDecoration(
           gradient: LinearGradient(
-              colors: [orangeColors, orangeLightColors],
+              colors: [blueColors, blueLightColors],
               end: Alignment.bottomCenter,
               begin: Alignment.topCenter),
-          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(100))),
+          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(100)),
+      ),
       child: Stack(
         children: <Widget>[
           Positioned(
@@ -26,7 +28,20 @@ class HeaderContainer extends StatelessWidget {
             style: TextStyle(color: Colors.white,fontSize: 20),
           )),
           Center(
-            child: Image.asset("assets/logo.png"),
+            child: AnimatedTextKit(
+              isRepeatingAnimation: false,
+              animatedTexts: [
+                TypewriterAnimatedText(
+                  'College Planner App',
+                  textStyle: TextStyle(
+                    fontSize: 35.0,
+                    fontWeight: FontWeight.w900,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+              onTap: () {},
+            ),
           ),
         ],
       ),

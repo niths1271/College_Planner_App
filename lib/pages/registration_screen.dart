@@ -2,7 +2,10 @@ import 'package:college_planner_app/utils/color.dart';
 import 'package:college_planner_app/widgets/btn_widget.dart';
 import 'package:college_planner_app/widgets/herder_container.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+
+import 'login_screen.dart';
 
 class RegistrationScreen extends StatefulWidget {
   static String id = '/registration';
@@ -19,6 +22,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Container(
         padding: EdgeInsets.only(bottom: 30),
         child: Column(
@@ -92,6 +96,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           hintText: "Password",
                           prefixIcon: Icon(Icons.vpn_key),
                         ),
+                        obscureText: true,
                         onChanged: (value) {
                           password = value;
                         },
@@ -120,8 +125,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             text: "Already a member ? ",
                             style: TextStyle(color: Colors.black)),
                         TextSpan(
+                            recognizer:TapGestureRecognizer()..onTap = () => Navigator.pushNamed(context,LoginScreen.id),
                             text: "Login",
-                            style: TextStyle(color: orangeColors)),
+                            style: TextStyle(color: blueColors)),
                       ]),
                     )
                   ],

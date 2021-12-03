@@ -1,8 +1,10 @@
+import 'package:college_planner_app/pages/registration_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:college_planner_app/utils/color.dart';
 import 'package:college_planner_app/widgets/btn_widget.dart';
 import 'package:college_planner_app/widgets/herder_container.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -20,6 +22,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Container(
         padding: EdgeInsets.only(bottom: 30),
         child: Column(
@@ -102,8 +105,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             text: "Don't have an account ? ",
                             style: TextStyle(color: Colors.black)),
                         TextSpan(
+                            recognizer:TapGestureRecognizer()..onTap = () => Navigator.pushNamed(context, RegistrationScreen.id),
                             text: "Register",
-                            style: TextStyle(color: orangeColors)),
+                            style: TextStyle(color: blueColors)),
                       ]),
                     )
                   ],
