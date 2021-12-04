@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class OverviewScreen extends StatefulWidget {
   static String id = '/overview';
   const OverviewScreen({Key? key}) : super(key: key);
@@ -17,8 +16,6 @@ class _OverviewScreenState extends State<OverviewScreen> {
     "Calendar",
     "Subjects",
     "Grades",
-    "Hunga",
-    "Bunga"
   ];
 
   @override
@@ -233,6 +230,7 @@ class _OverviewScreenState extends State<OverviewScreen> {
       ),
     );
   }
+
 
   Widget Options(Size size) {
     return Container(

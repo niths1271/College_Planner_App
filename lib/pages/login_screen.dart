@@ -1,3 +1,4 @@
+import 'package:college_planner_app/pages/overview_screen.dart';
 import 'package:college_planner_app/pages/registration_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -62,7 +63,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       padding: EdgeInsets.only(left: 10),
                       child: TextField(
-                        keyboardType: TextInputType.emailAddress,
+                        obscureText: true,
+                        keyboardType: TextInputType.visiblePassword,
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           hintText: "Password",
@@ -89,7 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   email: email,
                                   password: password
                               );
-                              // Navigator.pushNamed(context,);
+                              Navigator.pushNamed(context,OverviewScreen.id);
                               print("Login Successful");
                             } catch (e) {
                               print(e);

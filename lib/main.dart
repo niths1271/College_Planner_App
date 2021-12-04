@@ -16,7 +16,7 @@ class PlannerApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        initialRoute:OverviewScreen.id,
+        initialRoute:WelcomePage.id,
         routes: {
           WelcomePage.id:(context)=>WelcomePage(),
           LoginScreen.id: (context) => LoginScreen(),
