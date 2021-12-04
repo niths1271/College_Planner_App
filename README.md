@@ -1,4 +1,4 @@
-# college_planner_app
+# College Planner
 
 A new Flutter project.
 
