@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:college_planner_app/utils/color.dart';
 import 'package:college_planner_app/widgets/btn_widget.dart';
-import 'package:college_planner_app/widgets/herder_container.dart';
+import 'package:college_planner_app/widgets/header_container.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 

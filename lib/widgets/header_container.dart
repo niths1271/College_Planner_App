@@ -32,7 +32,7 @@ class HeaderContainer extends StatelessWidget {
               isRepeatingAnimation: false,
               animatedTexts: [
                 TypewriterAnimatedText(
-                  'College Planner App',
+                  'College Planner',
                   textStyle: TextStyle(
                     fontSize: 35.0,
                     fontWeight: FontWeight.w900,
