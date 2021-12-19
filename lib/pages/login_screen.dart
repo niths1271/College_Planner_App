@@ -1,4 +1,4 @@
-import 'package:college_planner_app/pages/overview_screen.dart';
+import 'package:college_planner_app/pages/overviewScreen.dart';
 import 'package:college_planner_app/pages/registration_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -15,7 +15,6 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-
   final _auth = FirebaseAuth.instance;
   late String email;
   late String password;
@@ -88,10 +87,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           onClick: () async {
                             try {
                               await _auth.signInWithEmailAndPassword(
-                                  email: email,
-                                  password: password
-                              );
-                              Navigator.pushNamed(context,OverviewScreen.id);
+                                  email: email, password: password);
+                              Navigator.pushNamed(context, OverviewScreen.id);
                               print("Login Successful");
                             } catch (e) {
                               print(e);
@@ -107,7 +104,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             text: "Don't have an account ? ",
                             style: TextStyle(color: Colors.black)),
                         TextSpan(
-                            recognizer:TapGestureRecognizer()..onTap = () => Navigator.pushNamed(context, RegistrationScreen.id),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () => Navigator.pushNamed(
+                                  context, RegistrationScreen.id),
                             text: "Register",
                             style: TextStyle(color: blueColors)),
                       ]),

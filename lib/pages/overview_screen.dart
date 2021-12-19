@@ -9,7 +9,6 @@ class OverviewScreen extends StatefulWidget {
 }
 
 class _OverviewScreenState extends State<OverviewScreen> {
-
   final List<String> options = [
     "TimeTable",
     "Agenda",
@@ -24,7 +23,7 @@ class _OverviewScreenState extends State<OverviewScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Overview"),
-        backgroundColor: Color.fromRGBO(52, 113, 235, 1),
+        // backgroundColor: Color.fromRGBO(52, 113, 235, 1),
       ),
       drawer: Drawer(
         child: ListView(
@@ -230,7 +229,6 @@ class _OverviewScreenState extends State<OverviewScreen> {
       ),
     );
   }
-
 
   Widget Options(Size size) {
     return Container(
