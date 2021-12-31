@@ -1,7 +1,9 @@
+import 'package:college_planner_app/utils/color.dart';
 import 'package:flutter/material.dart';
 
 class OverviewScreen extends StatefulWidget {
   static String id = '/overview';
+
   const OverviewScreen({Key? key}) : super(key: key);
 
   @override
@@ -87,27 +89,48 @@ class _OverviewScreenState extends State<OverviewScreen> {
                   ),
                   Container(
                     width: size.width / 1.25,
-                    child: Text(
-                      "Today",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                      ),
-                    ),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(18),
-                        topRight: Radius.circular(18),
-                      ),
-                      image: DecorationImage(
-                          image: NetworkImage(
-                            "https://images.pexels.com/photos/213780/pexels-photo-213780.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=150",
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.bookmark,
+                          color: Colors.white,
+                          size: 24.0,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          "Today",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
                           ),
-                          fit: BoxFit.fill),
+                        ),
+                      ],
                     ),
                   ),
                   SizedBox(
-                    height: size.height / 30,
+                    height: size.height / 40,
+                  ),
+                  Container(
+                    child: Image.asset(
+                      "assets/study.jpg",
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                  SizedBox(
+                    height: size.height / 40,
+                  ),
+                  Container(
+                    child: Image.asset(
+                      "assets/study.jpg",
+                      fit: BoxFit.fill,
+                    ),
+                    width:350,
+                    height:180,
+                  ),
+                  SizedBox(
+                    height: size.height / 40,
                   ),
                   Container(
                     width: size.width / 1.2,
@@ -131,7 +154,7 @@ class _OverviewScreenState extends State<OverviewScreen> {
               width: size.width / 1.1,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: Color.fromRGBO(52, 113, 235, 1),
+                color: blueLightColors,
               ),
               child: Column(
                 children: [
@@ -140,27 +163,30 @@ class _OverviewScreenState extends State<OverviewScreen> {
                   ),
                   Container(
                     width: size.width / 1.25,
-                    child: Text(
-                      "Tomorrow",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                      ),
-                    ),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(18),
-                        topRight: Radius.circular(18),
-                      ),
-                      image: DecorationImage(
-                          image: NetworkImage(
-                            "https://burst.shopifycdn.com/photos/wrtiting-tools.jpg?width=1200&format=pjpg&exif=0&iptc=0",
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.bookmark,
+                          color: Colors.white,
+                          size: 24.0,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          "Tomorrow",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
                           ),
-                          fit: BoxFit.fill),
+                        ),
+                      ],
                     ),
+                    // width:350,
+                    height:180,
                   ),
                   SizedBox(
-                    height: size.height / 30,
+                    height: size.height / 40,
                   ),
                   Container(
                     width: size.width / 1.2,

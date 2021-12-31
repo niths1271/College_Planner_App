@@ -1,3 +1,4 @@
+import 'package:college_planner_app/pages/setup_screen.dart';
 import 'package:college_planner_app/utils/color.dart';
 import 'package:college_planner_app/widgets/btn_widget.dart';
 import 'package:college_planner_app/widgets/header_container.dart';
@@ -134,7 +135,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                    try {
                                      await _auth.createUserWithEmailAndPassword(
                                          email: email, password: password);
-                                     // Navigator.pushNamed(context,);
+                                     Navigator.pushNamed(context,SetupScreen.id);
                                      print("Registered Successfully");
                                    } catch (e) {
                                      print(e);
