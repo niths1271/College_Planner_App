@@ -140,7 +140,7 @@ class _SetupScreenState extends State<SetupScreen> {
                    ListTile(
                      leading: Icon(Icons.calendar_today_outlined,size: 30, color: Colors.blue),
                      title: Text('${(i+1).toString()}${mapd[i]} Term'),
-                     subtitle: Text("${startdates[i]+" - "+enddates[i]}",),
+                     subtitle: Text("${(startdates[i]=='' || enddates[i]=='')?"Not Set":startdates[i]+" - "+enddates[i]}",),
                    ),
                  ],
                ),
