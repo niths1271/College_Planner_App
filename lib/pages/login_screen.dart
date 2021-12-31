@@ -1,5 +1,6 @@
 import 'package:college_planner_app/pages/overviewScreen.dart';
 import 'package:college_planner_app/pages/registration_screen.dart';
+import 'package:college_planner_app/pages/reset.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:college_planner_app/utils/color.dart';
@@ -77,8 +78,15 @@ class _LoginScreenState extends State<LoginScreen> {
                     Container(
                       margin: EdgeInsets.only(top: 10),
                       alignment: Alignment.centerRight,
-                      child: Text(
-                        "Forgot Password?",
+                      child:RichText(
+                        text: TextSpan(children: [
+                          TextSpan(
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () => Navigator.pushNamed(
+                                    context, ResetScreen.id),
+                              text: "Forgot Password?",
+                              style: TextStyle(color: blueColors)),
+                        ]),
                       ),
                     ),
                     Expanded(
