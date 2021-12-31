@@ -229,19 +229,19 @@ class _SetupScreenState extends State<SetupScreen> {
         padding: const EdgeInsets.only(bottom: 30.0, right: 20.0),
         child: FloatingActionButton(
           onPressed: () async {
-            await _firestore.collection('ProfileDetails').add({
+            await _firestore.collection('Terms').add({
               'terms': details[dropdownValue],
-              'sender': loggedInUser.email,
+              'sender': loggedInUser.uid,
             });
             for(int i=0;i<details[dropdownValue]!;i++) {
               if (startdates[i] != '' || enddates[i] != '') {
                 await _firestore.collection('TermStartDates').add({
                   (i + 1).toString(): startdates[i],
-                  'sender': loggedInUser.email,
+                  'sender': loggedInUser.uid,
                 });
                 await _firestore.collection('TermEndDates').add({
                   (i + 1).toString(): enddates[i],
-                  'sender': loggedInUser.email,
+                  'sender': loggedInUser.uid,
                 });
               }
             }
