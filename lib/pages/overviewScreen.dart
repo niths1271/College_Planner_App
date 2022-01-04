@@ -11,6 +11,7 @@ import '../chart/chart_container.dart';
 import '../chart/line_chart.dart';
 import 'package:fl_chart/fl_chart.dart';
 
+// hi
 // import { collection, query, where, getDocs } from "firebase/firestore";
 final _firestore = FirebaseFirestore.instance;
 late User loggedInUser;
