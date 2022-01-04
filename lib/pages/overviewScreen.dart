@@ -234,6 +234,7 @@ class _OverviewScreenState extends State<OverviewScreen> {
       Color(0xff62abe3),
       Color(0xff365d7a),
     ];
+
     lineChartBarData = [
       LineChartBarData(colors: lineColor, isCurved: true, spots: [
         FlSpot(today.weekday.toDouble(),
