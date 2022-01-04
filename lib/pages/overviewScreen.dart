@@ -229,6 +229,7 @@ class _OverviewScreenState extends State<OverviewScreen> {
     setState(() {
       numTotalEvents += 0;
     });
+
     List<Color> lineColor = [
       Color(0xff62abe3),
       Color(0xff365d7a),
