@@ -1,3 +1,6 @@
+import 'package:college_planner_app/widgets/attendence.dart';
+import 'package:college_planner_app/widgets/grades.dart';
+import 'package:college_planner_app/widgets/timetable.dart';
 import 'package:flutter/material.dart';
 
 final List<String> options = [
@@ -603,16 +606,16 @@ class Sidenav extends StatelessWidget {
               suffix: Text(
                 '',
                 style: TextStyle(fontWeight: FontWeight.w500),
-              ), onTap: () {
-            _navItemClicked(context, 4);
-          }, selected: selectedIndex == 4),
+              ),onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder:(context)=>Time()));
+              },selected: selectedIndex == 4),
           Divider(color: Colors.grey.shade400),
           _navItem(
             context,
             Icons.emoji_events,
             'Grades',
             onTap: () {
-              _navItemClicked(context, 5);
+              Navigator.push(context, MaterialPageRoute(builder:(context)=>Grades()));
             },
             selected: selectedIndex == 5,
             suffix: Text(""),
@@ -622,7 +625,8 @@ class Sidenav extends StatelessWidget {
             Icons.event_available,
             'Attendance',
             onTap: () {
-              _navItemClicked(context, 6);
+
+              Navigator.push(context, MaterialPageRoute(builder:(context)=>Attendence()));
             },
             selected: selectedIndex == 6,
             suffix: Text(""),
