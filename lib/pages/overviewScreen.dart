@@ -25,7 +25,7 @@ var todayClasses = [],
     fiveClasses = [];
 
 var todayEvents = [], tomorrowEvents = [];
-
+//aa
 final List<String> options = [
   "TimeTable",
   "Agenda",
@@ -1174,16 +1174,18 @@ class Sidenav extends StatelessWidget {
               suffix: Text(
                 '',
                 style: TextStyle(fontWeight: FontWeight.w500),
-              ),onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder:(context)=>Time()));
-              },selected: selectedIndex == 4),
+              ), onTap: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => Time()));
+          }, selected: selectedIndex == 4),
           Divider(color: Colors.grey.shade400),
           _navItem(
             context,
             Icons.emoji_events,
             'Grades',
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder:(context)=>Grades()));
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Grades()));
             },
             selected: selectedIndex == 5,
             suffix: Text(""),
@@ -1193,8 +1195,8 @@ class Sidenav extends StatelessWidget {
             Icons.event_available,
             'Attendance',
             onTap: () {
-
-              Navigator.push(context, MaterialPageRoute(builder:(context)=>Attendence()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => Attendence()));
             },
             selected: selectedIndex == 6,
             suffix: Text(""),
