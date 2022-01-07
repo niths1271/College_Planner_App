@@ -20,6 +20,31 @@ class _LoginScreenState extends State<LoginScreen> {
   late String email;
   late String password;
 
+  Future<void> _showMyDialog(String e) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+            content: SingleChildScrollView(
+              child: ListBody(
+                children:<Widget>[
+                  Text(e),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: Text("Okay"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ]);
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -99,7 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               Navigator.pushNamed(context, OverviewScreen.id);
                               print("Login Successful");
                             } catch (e) {
-                              print(e);
+                              _showMyDialog(e.toString());
                             }
                           },
                           btnText: "LOGIN",

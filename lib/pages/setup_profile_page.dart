@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 
+
 final _firestore = FirebaseFirestore.instance;
 late User loggedInUser;
 
@@ -85,7 +86,7 @@ class _ProfilePageState extends State<ProfilePage> with InputValidationMixin {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Padding(
-                                padding: EdgeInsets.only(left: 70.0),
+                                padding: EdgeInsets.only(left: 90.0),
                                 child: Text('COMPLETE PROFILE',
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,

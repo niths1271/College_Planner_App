@@ -30,6 +30,31 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   late String email;
   late String password;
 
+  Future<void> _showMyDialog(String e) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+            content: SingleChildScrollView(
+              child: ListBody(
+                children:<Widget>[
+                  Text(e),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: Text("Okay"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ]);
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -139,7 +164,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                      Navigator.pushNamed(context,ProfilePage.id);
                                      print("Registered Successfully");
                                    } catch (e) {
-                                     print(e);
+                                     _showMyDialog(e.toString());
                                    }
                                  // }else{
                                  //   print("Wrong input");
