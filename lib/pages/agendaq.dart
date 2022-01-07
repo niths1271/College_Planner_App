@@ -1,88 +1,125 @@
 import 'package:college_planner_app/pages/overviewScreen.dart';
-import 'package:college_planner_app/widgets/attendence.dart';
 import 'package:college_planner_app/widgets/attendhome.dart';
 import 'package:college_planner_app/widgets/grades.dart';
-import 'package:college_planner_app/widgets/timeadd.dart';
+import 'package:college_planner_app/widgets/time_picker_widget.dart';
+import 'package:college_planner_app/widgets/timetable.dart';
+//import 'package:college_planner_app/widgets/remainder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-import 'package:syncfusion_flutter_calendar/calendar.dart';
+import 'agenda_add.dart';
+//import 'exam.dart';
+//import 'home_work.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-class Time extends StatelessWidget {
-  static String id = '/timetable';
-  // This widget is the root oT your application.
+final _firestore = FirebaseFirestore.instance;
+late User loggedInUser;
+
+class Agenda extends StatefulWidget {
+  static String id = '/agenda';
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(title: 'Timetable'),
-    );
-  }
+  _AgendaState createState() => _AgendaState();
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({key, required this.title}) : super(key: key);
-  // MyHomePage({ required Key key,  required this.title}) : super(key: key) {
+class _AgendaState extends State<Agenda> {
+  late var agendas = <Widget>[];
+  final _auth = FirebaseAuth.instance;
 
-  //  throw UnimplementedError();
-  /// }
+  void getAgendas() async {
+    try {
+      print("inside getagenda try");
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
+      final snaps = await _firestore.collection('Agenda').get();
+      for (var docm in snaps.docs) {
+        if (docm['sender'] == loggedInUser.uid) {
+          String time = DateTime.fromMillisecondsSinceEpoch(
+                      docm['date'].seconds * 1000)
+                  .toString()
+                  .substring(0, 10) +
+              " at " +
+              DateTime.fromMillisecondsSinceEpoch(docm['date'].seconds * 1000)
+                  .toString()
+                  .substring(11, 16);
+          print("adding");
+          print(docm['title']);
+          var agenda = Container(
+            color: Colors.transparent,
+            margin: EdgeInsets.all(4.0),
+            padding: EdgeInsets.all(4.0),
+            child: Padding(
+              padding: EdgeInsets.all(3.0),
+              child: Material(
+                color: Colors.blueAccent.withOpacity(0.4),
+                borderRadius: BorderRadius.circular(10.0),
+                child: Container(
+                  color: Colors.transparent,
+                  margin: EdgeInsets.all(4.0),
+                  child: ExpansionTile(
+                    initiallyExpanded: false,
+                    childrenPadding: EdgeInsets.all(12.0),
+                    title: Text(
+                      docm['title'],
+                      style: TextStyle(
+                        color: Colors.black54,
+                        fontSize: 25.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    children: [
+                      ListTile(
+                        title: Text(
+                          docm['note'],
+                        ),
+                        subtitle: Text(
+                          time,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          );
 
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-/*List<Appointment> getAppointments() {
-  List<Appointment> meetings = <Appointment>[];
-  final DateTime today = DateTime.now();
-  final DateTime startTime =
-  DateTime(today.year, today.month, today.day, 9, 0, 0);
-  final DateTime endTime = startTime.add(const Duration(hours: 2));
-
- /* meetings.add(Appointment(
-      startTime: startTime,
-      endTime: endTime,
-      subject: 'Board Meeting',
-      color: Colors.blue,
-      recurrenceRule: 'FREQ=DAILY;COUNT=10',
-      isAllDay: false));
-
-  return meetings;
-}*/
-
-class MeetingDataSource extends CalendarDataSource {
-  MeetingDataSource(List<Appointment> source) {
-    appointments = source;
+          setState(() {
+            agendas.add(agenda);
+          });
+        }
+      }
+    } catch (e) {
+      print(e);
+    }
   }
-}*/
-class _MyHomePageState extends State<MyHomePage> {
+
+  void getCurrentUser() async {
+    try {
+      final user = await _auth.currentUser!;
+      if (user != null) {
+        loggedInUser = user;
+        print(user);
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getCurrentUser();
+    getAgendas();
+  }
+
   int navIndex = 0;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Colors.white,
+        //backgroundColor: Colors.white,
         appBar: AppBar(
-          title: Text('TimeTable'),
+          title: Text('Agenda'),
           backgroundColor: Colors.blueAccent,
         ),
         drawer: Theme(
@@ -96,33 +133,35 @@ class _MyHomePageState extends State<MyHomePage> {
             });
           }),
         ),
-        body:
-            // bodyHeight = MediaQuery.of(context).size.height - Scaffold.of(context).appBarMaxHeight
-            //  MediaQuery. of(context). size. height;
-
-            Row(
-          // bodyHeight = MediaQuery.of(context).size.height - Scaffold.of(context).appBarMaxHeight,
-          mainAxisAlignment: MainAxisAlignment.start,
-          // double height = MediaQuery. of(context). size. height;
-          //  bodyHeight = MediaQuery.of(context).size.height - Scaffold.of(context).appBarMaxHeight,
-          // bodyHeight = MediaQuery.of(context).size.height - Scaffold.of(context).appBarMaxHeight,
-          children: [
-            SfCalendar(
-              // bodyHeight = MediaQuery.of(context).size.height - Scaffold.of(context).appBarMaxHeight,
-              view: CalendarView.week,
-              firstDayOfWeek: 6,
-              //initialDisplayDate: DateTime(2021, 03, 01, 08, 30),
-              // initialSelectedDate: DateTime(2021, 03, 01, 08, 30),
-              //  dataSource: MeetingDataSource(getAppointments()),
+        body: Padding(
+          padding: EdgeInsets.all(32),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: agendas,
             ),
-          ],
+          ),
         ),
+
+        //  body: SafeArea(
+        // child: Row(
+        //  children:<Widget>[
+        //  Container(
+        //   width: 100.0,
+        //  height: 100.0,
+        //  color: Colors.yellow,
+        //  child: Text('Your absence 1 out of 10'),
+
+        //  ),
+        // ],
         floatingActionButton: SpeedDial(
             icon: Icons.add,
             overlayColor: Colors.black,
             onPress: () async {
-              String received = await Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => Timeadd()));
+              await Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => AgendaAdd()));
+              getAgendas();
             }),
       ),
     );
@@ -194,8 +233,8 @@ class Sidenav extends StatelessWidget {
             Icons.event_available,
             'Attendance',
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => Attendence()));
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Grades()));
             },
             selected: selectedIndex == 6,
             suffix: Text(""),
@@ -257,3 +296,5 @@ class Sidenav extends StatelessWidget {
     Navigator.of(context).pop();
   }
 }
+
+// waste
