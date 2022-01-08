@@ -10,6 +10,9 @@ import 'package:charts_flutter/flutter.dart' as charts;
 import '../chart/chart_container.dart';
 import '../chart/line_chart.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'agenda_add.dart';
+import 'agendaq.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 // hi bro hey
 // import { collection, query, where, getDocs } from "firebase/firestore";
@@ -23,6 +26,10 @@ var todayClasses = [],
     threeClasses = [],
     fourClasses = [],
     fiveClasses = [];
+const spinkit = SpinKitRing(
+  color: Colors.white,
+  size: 50.0,
+);
 
 var todayEvents = [], tomorrowEvents = [];
 //aa
@@ -59,19 +66,17 @@ class _OverviewScreenState extends State<OverviewScreen> {
   Future<int> getEvents() async {
     int numEvents = 0;
     try {
-      print("inside");
+      print("inside event");
       final snaps = await _firestore.collection('Agenda').get();
       // await for (var snapshot in _firestore.collection('Agenda').snapshots()) {
-      numEvents = snaps.docs.length;
+      // numEvents = snaps.docs.length;
       for (var docm in snaps.docs) {
         if (docm['sender'] == loggedInUser.uid) {
+          numEvents++;
           print(docm['date']);
           if (DateTime.fromMillisecondsSinceEpoch(docm['date'].seconds * 1000)
-                      .day ==
-                  today.day &&
-              DateTime.fromMillisecondsSinceEpoch(docm['start'].seconds * 1000)
-                      .hour >=
-                  today.hour) {
+                  .day ==
+              today.day) {
             setState(() {
               todayEvents.add(docm.data());
             });
@@ -102,15 +107,13 @@ class _OverviewScreenState extends State<OverviewScreen> {
       print("inside");
       final snaps = await _firestore.collection('TimeTable').get();
       // for (var snapshot in snaps) {
-      numClasses = snaps.docs.length;
+      // numClasses = snaps.docs.length;
       for (var docm in snaps.docs) {
         if (docm['sender'] == loggedInUser.uid) {
+          numClasses++;
           if (DateTime.fromMillisecondsSinceEpoch(docm['start'].seconds * 1000)
-                      .day ==
-                  today.day &&
-              DateTime.fromMillisecondsSinceEpoch(docm['start'].seconds * 1000)
-                      .hour >=
-                  today.hour) {
+                  .day ==
+              today.day) {
             todayClasses.add(docm.data());
           } else if (DateTime.fromMillisecondsSinceEpoch(
                       docm['start'].seconds * 1000)
@@ -169,6 +172,8 @@ class _OverviewScreenState extends State<OverviewScreen> {
   }
 
   int navIndex = 0;
+  late ChartContainer myChart;
+  bool chartSet = false;
   late var oneDayFromTomorrowD,
       twoDaysFromTomorrowD,
       threeDaysFromTomorrowD,
@@ -254,6 +259,13 @@ class _OverviewScreenState extends State<OverviewScreen> {
             fiveClasses.length.toDouble())
       ])
     ];
+
+    myChart = ChartContainer(
+      title: '',
+      color: Color.fromRGBO(45, 108, 223, 1),
+      chart: LineChartContent(lineChartBarData: lineChartBarData),
+    );
+    chartSet = true;
   }
 
   @override
@@ -266,6 +278,9 @@ class _OverviewScreenState extends State<OverviewScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Container mySpinner = Container(
+      child: spinkit,
+    );
     final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Color.fromRGBO(207, 214, 227, 1),
@@ -335,12 +350,7 @@ class _OverviewScreenState extends State<OverviewScreen> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Expanded(
-                          child: ChartContainer(
-                            title: 'Line Chart',
-                            color: Color.fromRGBO(45, 108, 223, 1),
-                            chart: LineChartContent(
-                                lineChartBarData: lineChartBarData),
-                          ),
+                          child: chartSet ? myChart : mySpinner,
                         ),
                         SizedBox(
                           width: 120.0,
@@ -608,6 +618,7 @@ class FourDayClasses extends StatelessWidget {
 class ThreeDayClasses extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    print("3 dat class");
     var threeDayClasses = <Widget>[];
     for (var event in threeClasses) {
       String start =
@@ -671,6 +682,7 @@ class ThreeDayClasses extends StatelessWidget {
 class TwoDayClasses extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    print("2 dat class");
     var twoDayClasses = <Widget>[];
     for (var event in twoClasses) {
       String start =
@@ -733,6 +745,7 @@ class TwoDayClasses extends StatelessWidget {
 class OneDayClasses extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    print("1 dat class");
     var oneDayClasses = <Widget>[];
     for (var event in oneClasses) {
       String start =
@@ -1162,6 +1175,8 @@ class Sidenav extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.w500),
               ), onTap: () {
             _navItemClicked(context, 2);
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => Agenda()));
           }, selected: selectedIndex == 2),
           _navItem(context, Icons.calendar_today, 'Calendar',
               suffix: Text(
