@@ -121,7 +121,7 @@ class _AgendaAddState extends State<AgendaAdd> {
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text('Agenda'),
+        title: Text('Assignments'),
         backgroundColor: Colors.blue,
         automaticallyImplyLeading: true,
         //`true` if you want Flutter to automatically add Back Button when needed,
@@ -143,7 +143,7 @@ class _AgendaAddState extends State<AgendaAdd> {
             onPressed: () async {
               atTime = DateTime(selectedDate.year, selectedDate.month,
                   selectedDate.day, selectedTime.hour, selectedTime.minute);
-              await _firestore.collection('Agenda').add({
+              await _firestore.collection('Assignments').add({
                 'note': note,
                 'title': title,
                 'sender': loggedInUser.uid,
@@ -172,7 +172,7 @@ class _AgendaAddState extends State<AgendaAdd> {
                   },
                   decoration: InputDecoration(
                     border: InputBorder.none,
-                    labelText: "Title",
+                    labelText: "Subject",
                   ),
                 ),
               ),
@@ -202,7 +202,7 @@ class _AgendaAddState extends State<AgendaAdd> {
                     Column(
                       children: <Widget>[
                         Text(
-                          'Choose Date',
+                          'Choose Due Date',
                           style: TextStyle(
                               // fontStyle: FontStyle.italic,
                               fontWeight: FontWeight.w600,
@@ -240,7 +240,7 @@ class _AgendaAddState extends State<AgendaAdd> {
                     Column(
                       children: <Widget>[
                         Text(
-                          'Choose Time',
+                          'Choose Due Time',
                           style: TextStyle(
                               // fontStyle: FontStyle.italic,
                               fontWeight: FontWeight.w600,

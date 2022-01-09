@@ -2,7 +2,7 @@ import 'package:college_planner_app/pages/overviewScreen.dart';
 import 'package:college_planner_app/widgets/attendhome.dart';
 import 'package:college_planner_app/widgets/grades.dart';
 import 'package:college_planner_app/widgets/time_picker_widget.dart';
-import 'package:college_planner_app/widgets/timetable.dart';
+import 'package:college_planner_app/widgets/Classes.dart';
 //import 'package:college_planner_app/widgets/remainder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
@@ -127,7 +127,7 @@ class Sidenav extends StatelessWidget {
               ), onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder:(context)=>OverviewScreen ()));
               }, selected: selectedIndex == 1),
-          _navItem(context, Icons.bookmark, 'Agenda',
+          _navItem(context, Icons.bookmark, 'Assignments',
               suffix: Text(
                 '',
                 style: TextStyle(fontWeight: FontWeight.w500),
@@ -141,12 +141,12 @@ class Sidenav extends StatelessWidget {
               ), onTap: () {
                 _navItemClicked(context, 3);
               }, selected: selectedIndex == 3),
-          _navItem(context, Icons.pending_actions, 'Timetable',
+          _navItem(context, Icons.pending_actions, 'Classes',
               suffix: Text(
                 '',
                 style: TextStyle(fontWeight: FontWeight.w500),
               ), onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder:(context)=> Time()));
+                Navigator.push(context, MaterialPageRoute(builder:(context)=> Classes()));
               }, selected: selectedIndex == 4),
           Divider(color: Colors.grey.shade400),
           _navItem(

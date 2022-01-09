@@ -1,6 +1,6 @@
 import 'package:college_planner_app/widgets/attendence.dart';
 import 'package:college_planner_app/widgets/grades.dart';
-import 'package:college_planner_app/widgets/timetable.dart';
+import 'package:college_planner_app/widgets/Classes.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -34,8 +34,8 @@ const spinkit = SpinKitRing(
 var todayEvents = [], tomorrowEvents = [];
 //aa
 final List<String> options = [
-  "TimeTable",
-  "Agenda",
+  "Classes",
+  "Assignments",
   "Calendar",
   "Subjects",
   "Grades",
@@ -67,8 +67,8 @@ class _OverviewScreenState extends State<OverviewScreen> {
     int numEvents = 0;
     try {
       print("inside event");
-      final snaps = await _firestore.collection('Agenda').get();
-      // await for (var snapshot in _firestore.collection('Agenda').snapshots()) {
+      final snaps = await _firestore.collection('Asssignments').get();
+      // await for (var snapshot in _firestore.collection('Assignments').snapshots()) {
       // numEvents = snaps.docs.length;
       for (var docm in snaps.docs) {
         if (docm['sender'] == loggedInUser.uid) {
@@ -105,7 +105,7 @@ class _OverviewScreenState extends State<OverviewScreen> {
     int numClasses = 0;
     try {
       print("inside");
-      final snaps = await _firestore.collection('TimeTable').get();
+      final snaps = await _firestore.collection('Classes').get();
       // for (var snapshot in snaps) {
       // numClasses = snaps.docs.length;
       for (var docm in snaps.docs) {
@@ -852,7 +852,7 @@ class NoTodayClasses extends StatelessWidget {
                 ),
               ),
               subtitle: Text(
-                  'You can always add new classes from the timetable menu'),
+                  'You can always add new classes from the Classes menu'),
             ),
             Padding(
               padding: EdgeInsets.symmetric(
@@ -1076,7 +1076,7 @@ class NoEvents extends StatelessWidget {
                   ),
                 ),
               ),
-              subtitle: Text('You can always add new events in the agenda tab'),
+              subtitle: Text('You can always add new assignments in the Assignments tab'),
             ),
             Padding(
               padding: EdgeInsets.symmetric(
@@ -1169,7 +1169,7 @@ class Sidenav extends StatelessWidget {
               ), onTap: () {
             _navItemClicked(context, 1);
           }, selected: selectedIndex == 1),
-          _navItem(context, Icons.bookmark, 'Agenda',
+          _navItem(context, Icons.bookmark, 'Assignments',
               suffix: Text(
                 '',
                 style: TextStyle(fontWeight: FontWeight.w500),
@@ -1185,13 +1185,13 @@ class Sidenav extends StatelessWidget {
               ), onTap: () {
             _navItemClicked(context, 3);
           }, selected: selectedIndex == 3),
-          _navItem(context, Icons.pending_actions, 'Timetable',
+          _navItem(context, Icons.pending_actions, 'Classes',
               suffix: Text(
                 '',
                 style: TextStyle(fontWeight: FontWeight.w500),
               ), onTap: () {
             Navigator.push(
-                context, MaterialPageRoute(builder: (context) => Time()));
+                context, MaterialPageRoute(builder: (context) => Classes()));
           }, selected: selectedIndex == 4),
           Divider(color: Colors.grey.shade400),
           _navItem(
@@ -1212,6 +1212,7 @@ class Sidenav extends StatelessWidget {
             onTap: () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => Attendence()));
+
             },
             selected: selectedIndex == 6,
             suffix: Text(""),

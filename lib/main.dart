@@ -8,8 +8,8 @@ import 'package:college_planner_app/pages/login_screen.dart';
 import 'package:college_planner_app/pages/registration_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'widgets/timeadd.dart';
-import 'widgets/timetable.dart';
+import 'widgets/Classes_add.dart';
+import 'widgets/Classes.dart';
 import 'pages/agendaq.dart';
 
 void main() async {
@@ -29,8 +29,8 @@ class PlannerApp extends StatelessWidget {
       SetupScreen.id: (context) => SetupScreen(),
       ProfilePage.id: (context) => ProfilePage(),
       ResetScreen.id: (context) => ResetScreen(),
-      Timeadd.id: (context) => Timeadd(),
-      Time.id: (context) => Time(),
+      //ClassesAdd.id: (context) => ClassesAdd(),
+      Classes.id: (context) => Classes(),
       Agenda.id: (context) => Agenda(),
     });
   }
