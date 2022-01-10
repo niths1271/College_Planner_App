@@ -3,7 +3,7 @@
 import 'package:college_planner_app/pages/attendence.dart';
 import 'package:college_planner_app/widgets/date_picker_widget.dart';
 import 'package:college_planner_app/pages/grades.dart';
-import 'agendaq.dart';
+//import '../widgets/agendaq.dart';
 import 'package:college_planner_app/widgets/button_widget.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -174,7 +174,7 @@ class _AttendenceAddState extends State<AttendenceAdd> {
                   },
                   decoration: InputDecoration(
                     border: InputBorder.none,
-                    labelText: "Title",
+                    labelText: "Subject",
                   ),
                 ),
               ),

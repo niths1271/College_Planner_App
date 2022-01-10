@@ -1,10 +1,10 @@
 import 'dart:io';
 
 import 'package:college_planner_app/pages/overviewScreen.dart';
-import 'package:college_planner_app/widgets/attendence.dart';
-import 'package:college_planner_app/widgets/attendhome.dart';
+import 'package:college_planner_app/pages/attendence.dart';
+import 'package:college_planner_app/pages/attendhome.dart';
 import 'package:college_planner_app/widgets/date_picker_widget.dart';
-import 'package:college_planner_app/widgets/grades.dart';
+import 'package:college_planner_app/pages/grades.dart';
 import 'package:college_planner_app/widgets/subject.dart';
 //import 'package:date_picker_example/widget/date_picker_widget.dart';
 //import 'package:custom_switch/custom_switch.dart';

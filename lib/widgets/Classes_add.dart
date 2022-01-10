@@ -1,6 +1,6 @@
-import 'package:college_planner_app/widgets/attendence.dart';
+import 'package:college_planner_app/pages/attendence.dart';
 import 'package:college_planner_app/widgets/date_picker_widget.dart';
-import 'package:college_planner_app/widgets/grades.dart';
+import 'package:college_planner_app/pages/grades.dart';
 import 'Classes.dart';
 import 'package:college_planner_app/widgets/button_widget.dart';
 import 'package:flutter/foundation.dart';

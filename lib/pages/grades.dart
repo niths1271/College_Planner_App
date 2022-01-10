@@ -1,7 +1,7 @@
 import 'package:college_planner_app/pages/overviewScreen.dart';
-import 'package:college_planner_app/widgets/attendence.dart';
-import 'package:college_planner_app/widgets/attendhome.dart';
-import 'package:college_planner_app/widgets/gradeadd.dart';
+import 'package:college_planner_app/pages/attendence.dart';
+import 'package:college_planner_app/pages/attendhome.dart';
+import 'package:college_planner_app/pages/gradeadd.dart';
 import 'package:college_planner_app/widgets/Classes.dart';
 //import 'package:college_planner_app/widgets/remainder.dart';
 import 'package:flutter/material.dart';

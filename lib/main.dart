@@ -8,7 +8,7 @@ import 'package:college_planner_app/pages/login_screen.dart';
 import 'package:college_planner_app/pages/registration_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:college_planner_app/widgets/attendence.dart';
+import 'package:college_planner_app/pages/attendence.dart';
 import 'widgets/Classes_add.dart';
 import 'widgets/Classes.dart';
 import 'pages/agendaq.dart';

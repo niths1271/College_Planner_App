@@ -1,6 +1,6 @@
 import 'package:college_planner_app/pages/overviewScreen.dart';
-import 'package:college_planner_app/widgets/attendence.dart';
-import 'package:college_planner_app/widgets/grades.dart';
+import 'package:college_planner_app/pages/attendence.dart';
+import 'package:college_planner_app/pages/grades.dart';
 import 'package:college_planner_app/widgets/time_picker_widget.dart';
 import 'package:college_planner_app/widgets/classes.dart';
 //import 'package:college_planner_app/widgets/remainder.dart';
