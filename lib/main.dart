@@ -1,3 +1,4 @@
+import 'package:college_planner_app/pages/grades.dart';
 import 'package:college_planner_app/pages/overviewScreen.dart';
 import 'package:college_planner_app/pages/reset.dart';
 import 'package:college_planner_app/pages/setup_profile_page.dart';
@@ -33,6 +34,7 @@ class PlannerApp extends StatelessWidget {
       //ClassesAdd.id: (context) => ClassesAdd(),
       Classes.id: (context) => Classes(),
       Attendence.id: (context) => Attendence(),
+      Grade.id: (context) => Grade(),
       Agenda.id: (context) => Agenda(),
     });
   }

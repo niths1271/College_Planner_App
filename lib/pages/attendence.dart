@@ -69,7 +69,7 @@ class _AttendenceState extends State<Attendence> {
                   child: ExpansionTile(
                     initiallyExpanded: false,
                     childrenPadding: EdgeInsets.all(12.0),
-                    //88888888888888888SWSW'): Text('SWF'),
+
                     title: Text(
                       dos['title'],
                       style: TextStyle(
@@ -79,7 +79,7 @@ class _AttendenceState extends State<Attendence> {
                       ),
                     ),
 
-                    //if    dos['title']==true
+
                     children: [
                       ListTile(
                         title:Text(
@@ -245,7 +245,7 @@ class Sidenav extends StatelessWidget {
             'Grades',
             onTap: () {
               Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Grades()));
+                  context, MaterialPageRoute(builder: (context) => Grade()));
             },
             selected: selectedIndex == 5,
             suffix: Text(""),

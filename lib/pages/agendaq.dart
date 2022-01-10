@@ -1,3 +1,4 @@
+import 'package:college_planner_app/pages/attendence.dart';
 import 'package:college_planner_app/pages/overviewScreen.dart';
 import 'package:college_planner_app/pages/attendhome.dart';
 import 'package:college_planner_app/pages/grades.dart';
@@ -223,7 +224,7 @@ class Sidenav extends StatelessWidget {
             'Grades',
             onTap: () {
               Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Grades()));
+                  context, MaterialPageRoute(builder: (context) => Grade()));
             },
             selected: selectedIndex == 5,
             suffix: Text(""),
@@ -234,7 +235,7 @@ class Sidenav extends StatelessWidget {
             'Attendance',
             onTap: () {
               Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Grades()));
+                  context, MaterialPageRoute(builder: (context) => Attendence()));
             },
             selected: selectedIndex == 6,
             suffix: Text(""),

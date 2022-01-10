@@ -225,7 +225,7 @@ class Sidenav extends StatelessWidget {
             'Grades',
             onTap: () {
               Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Grades()));
+                  context, MaterialPageRoute(builder: (context) => Grade()));
             },
             selected: selectedIndex == 5,
             suffix: Text(""),

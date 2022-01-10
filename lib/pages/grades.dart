@@ -1,43 +1,129 @@
 import 'package:college_planner_app/pages/overviewScreen.dart';
+
+
+import 'package:college_planner_app/widgets/time_picker_widget.dart';
+
 import 'package:college_planner_app/pages/attendence.dart';
 import 'package:college_planner_app/pages/attendhome.dart';
 import 'package:college_planner_app/pages/gradeadd.dart';
+
 import 'package:college_planner_app/widgets/Classes.dart';
 //import 'package:college_planner_app/widgets/remainder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-
+import 'gradeadd.dart';
 //import 'exam.dart';
 //import 'home_work.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 
+final _firestore = FirebaseFirestore.instance;
+late User loggedInUser;
 
-class  Grades extends StatelessWidget {
-  static final String title = 'Date (Range) & Time';
-//  Date({required this.DatePickerWidget(),required this.TimePickerWidget()()})
+class Grade extends StatefulWidget {
+  static String id = '/grade';
+  @override
+  _GradeState createState() => _GradeState();
+}
+
+class _GradeState extends State<Grade> {
+  late var grades = <Widget>[];
+  final _auth = FirebaseAuth.instance;
+
+  void getGrades() async {
+    try {
+      print("inside getgrade try");
+
+      final snaps = await _firestore.collection('Grades').get();
+      for (var docm in snaps.docs) {
+        if (docm['sender'] == loggedInUser.uid) {
+          /*String time = DateTime.fromMillisecondsSinceEpoch(
+              docm['date'].seconds * 1000)
+              .toString()
+              .substring(0, 10) +
+              " at " +
+              DateTime.fromMillisecondsSinceEpoch(docm['date'].seconds * 1000)
+                  .toString()
+                  .substring(11, 16);*/
+          print("adding");
+          print(docm['title']);
+          var grade = Container(
+            color: Colors.transparent,
+            margin: EdgeInsets.all(4.0),
+            padding: EdgeInsets.all(4.0),
+            child: Padding(
+              padding: EdgeInsets.all(3.0),
+              child: Material(
+                color: Colors.blueAccent.withOpacity(0.4),
+                borderRadius: BorderRadius.circular(10.0),
+                child: Container(
+                  color: Colors.transparent,
+                  margin: EdgeInsets.all(4.0),
+                  child: ExpansionTile(
+                    initiallyExpanded: false,
+                    childrenPadding: EdgeInsets.all(12.0),
+                    title: Text(
+                      docm['title'],
+                      style: TextStyle(
+                        color: Colors.black54,
+                        fontSize: 25.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    children: [
+                      ListTile(
+                        title: Text(
+                          docm['grade'],
+                        ),
+                        //  subtitle: Text(
+                        //   time,
+                        //  ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          );
+
+          setState(() {
+            grades.add(grade);
+          });
+        }
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void getCurrentUser() async {
+    try {
+      final user = await _auth.currentUser!;
+      if (user != null) {
+        loggedInUser = user;
+        print(user);
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
 
   @override
-  Widget build(BuildContext context) => MaterialApp(
-    debugShowCheckedModeBanner: false,
-    title: title,
-    theme: ThemeData(
-      primaryColor: Colors.black,
-    ),
-    home: MainPage(),
-  );
-}
-class MainPage extends StatefulWidget {
-  @override
-  _MainPageState createState() => _MainPageState();
-}
-class _MainPageState extends State<MainPage> {
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getCurrentUser();
+    getGrades();
+  }
+
   int navIndex = 0;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home : Scaffold(
-        backgroundColor: Colors.white,
+      home: Scaffold(
+        //backgroundColor: Colors.white,
         appBar: AppBar(
-
           title: Text('Grades'),
           backgroundColor: Colors.blueAccent,
         ),
@@ -52,6 +138,17 @@ class _MainPageState extends State<MainPage> {
             });
           }),
         ),
+        body: Padding(
+          padding: EdgeInsets.all(32),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: grades,
+            ),
+          ),
+        ),
+
         //  body: SafeArea(
         // child: Row(
         //  children:<Widget>[
@@ -66,43 +163,16 @@ class _MainPageState extends State<MainPage> {
         floatingActionButton: SpeedDial(
             icon: Icons.add,
             overlayColor: Colors.black,
-
-            onPress: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) =>Gradeadd()),
-              );
-
-            }
-
-
-          //child: Icon(Icons.add),
-          //backgroundColor: Colors.green,
-          //foregroundColor: Colors.white,
-          // onPressed: () {
-          // Navigator.push(
-          //  context,
-          //   MaterialPageRoute(builder: (context) =>Remainder()),
-          // );
-          //   }
-          //),
-
-          // ),
-
-        ),
+            onPress: () async {
+              await Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => GradeAdd()));
+              getGrades();
+            }),
       ),
     );
-
-
-
-
-
   }
-
-
-
-
 }
+
 class Sidenav extends StatelessWidget {
   final Function setIndex;
   final int selectedIndex;
@@ -126,9 +196,10 @@ class Sidenav extends StatelessWidget {
                 '',
                 style: TextStyle(fontWeight: FontWeight.w500),
               ), onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder:(context)=>OverviewScreen ()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => OverviewScreen()));
               }, selected: selectedIndex == 1),
-          _navItem(context, Icons.bookmark, 'Assignments',
+          _navItem(context, Icons.bookmark, 'Grades',
               suffix: Text(
                 '',
                 style: TextStyle(fontWeight: FontWeight.w500),
@@ -147,7 +218,8 @@ class Sidenav extends StatelessWidget {
                 '',
                 style: TextStyle(fontWeight: FontWeight.w500),
               ), onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder:(context)=> Classes()));
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => Classes()));
               }, selected: selectedIndex == 4),
           Divider(color: Colors.grey.shade400),
           _navItem(
@@ -155,7 +227,8 @@ class Sidenav extends StatelessWidget {
             Icons.emoji_events,
             'Grades',
             onTap: () {
-
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Grade()));
             },
             selected: selectedIndex == 5,
             suffix: Text(""),
@@ -165,8 +238,8 @@ class Sidenav extends StatelessWidget {
             Icons.event_available,
             'Attendance',
             onTap: () {
-
-              Navigator.push(context, MaterialPageRoute(builder:(context)=>Attendence()));
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Grade()));
             },
             selected: selectedIndex == 6,
             suffix: Text(""),
