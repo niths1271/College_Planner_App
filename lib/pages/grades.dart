@@ -4,7 +4,7 @@ import 'package:college_planner_app/pages/overviewScreen.dart';
 import 'package:college_planner_app/widgets/time_picker_widget.dart';
 
 import 'package:college_planner_app/pages/attendence.dart';
-import 'package:college_planner_app/pages/attendhome.dart';
+
 import 'package:college_planner_app/pages/gradeadd.dart';
 
 import 'package:college_planner_app/widgets/Classes.dart';
@@ -76,9 +76,13 @@ class _GradeState extends State<Grade> {
                         title: Text(
                           docm['grade'],
                         ),
-                        //  subtitle: Text(
-                        //   time,
-                        //  ),
+                         subtitle: Text(
+                           docm['dropdownColor'],
+
+                          ),
+
+
+
                       ),
                     ],
                   ),

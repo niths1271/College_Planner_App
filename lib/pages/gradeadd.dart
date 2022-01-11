@@ -101,27 +101,28 @@ class _GradeAddState extends State<GradeAdd> {
     }
   }
 
-  /* @override
+   @override
   void initState() {
     // TODO: implement initState
-    _dateController.text = DateFormat.yMd().format(DateTime.now());
+    //_dateController.text = DateFormat.yMd().format(DateTime.now());
 
-    _timeController.text = formatDate(
-        DateTime(2019, 08, 1, DateTime.now().hour, DateTime.now().minute),
-        [hh, ':', nn, " ", am]).toString();
+   // _timeController.text = formatDate(
+    //    DateTime(2019, 08, 1, DateTime.now().hour, DateTime.now().minute),
+    //    [hh, ':', nn, " ", am]).toString();
     super.initState();
     getCurrentUser();
-  }*/
+  }
 
   int index = 0;
 
   //String text;
   late String note, title;
+  late String  dropdownColor= "Written Exam";
+  var items=['Written Exam',' Oral Exam','Practical'];
   //late DateTime atTime;
+// bool isOn = false;
 
-  bool isOn = false;
-
-  bool _flutter = false;
+ // bool _flutter = false;
 
   // String newDate;
 
@@ -159,6 +160,7 @@ class _GradeAddState extends State<GradeAdd> {
               //selectedDate.day, selectedTime.hour, selectedTime.minute);
               await _firestore.collection('Grades').add({
                 'grade': note,
+                'dropdownColor':dropdownColor,
                 'title': title,
                 'sender': loggedInUser.uid,
                 //'date': Timestamp.fromDate(atTime),
@@ -204,6 +206,82 @@ class _GradeAddState extends State<GradeAdd> {
                 ),
               ),
               const SizedBox(height: 10),
+              Container(
+                width: _width / 1.7,
+                child:
+
+
+                Align(
+                  alignment: Alignment.centerLeft,
+
+                  child:DecoratedBox(
+
+
+
+                    decoration: BoxDecoration(
+                        color:Colors.white,
+                        //background color of dropdown button
+                        border: Border.all(color: Colors.black38, width:0), //border of dropdown button
+                        borderRadius: BorderRadius.horizontal(), //border raiuds of dropdown button
+                        boxShadow: <BoxShadow>[ //apply shadow on Dropdown button
+                          BoxShadow(
+
+                              color: Color.fromRGBO(0,0,0,0), //shadow for button
+                              blurRadius: 5) //blur radius of shadow
+                        ]
+                      //  width:50,
+                    ),
+
+                    child:Padding(
+                      //    width:50,
+                      padding: EdgeInsets.only(left:10, right:10,top: 10),
+                      child:DropdownButton(
+
+                        items: items.map((itemsname){
+                          style: new TextStyle(
+
+                            color: Colors.black,
+                            fontSize: 40,
+                            // fontWeight: FontWeight.bold,
+
+                          );
+                          return   DropdownMenuItem(
+                            value:itemsname ,
+                            child: Text(itemsname),
+
+
+                            // const TextStyle(color: Colors.grey),
+                          );
+                        }).toList(),
+
+
+                        onChanged: (String? newValue){
+                          setState(() {
+                            dropdownColor  = newValue!;
+                          });
+                          //   widget.onChanged(value);
+                        },
+                        style: const TextStyle(color: Colors.grey),
+                        selectedItemBuilder: (BuildContext context) {
+                          return options.map((String value) {
+                            return Text(
+                              dropdownColor,
+                              style: const TextStyle(color: Colors.black, fontSize: 20,),
+                            );
+                          }).toList();
+                        },
+                        //style: const TextStyle(color: Colors.grey),
+
+                        value: dropdownColor,
+
+                      ),
+                    ),
+                  ),
+                ),
+
+
+
+              ),
               // datetime start
 
               /* Container(
