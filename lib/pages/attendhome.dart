@@ -1,7 +1,9 @@
+
+
 import 'package:college_planner_app/pages/attendence.dart';
 import 'package:college_planner_app/widgets/date_picker_widget.dart';
 import 'package:college_planner_app/pages/grades.dart';
-import 'agendaq.dart';
+//import '../widgets/agendaq.dart';
 import 'package:college_planner_app/widgets/button_widget.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -16,12 +18,12 @@ import 'package:firebase_core/firebase_core.dart';
 final _firestore = FirebaseFirestore.instance;
 late User loggedInUser;
 
-class AgendaAdd extends StatefulWidget {
+class AttendenceAdd extends StatefulWidget {
   @override
-  _AgendaAddState createState() => _AgendaAddState();
+  _AttendenceAddState createState() => _AttendenceAddState();
 }
 
-class _AgendaAddState extends State<AgendaAdd> {
+class _AttendenceAddState extends State<AttendenceAdd> {
   // start datetime
 
   late double _height;
@@ -75,7 +77,7 @@ class _AgendaAddState extends State<AgendaAdd> {
   // end datetime
   final _auth = FirebaseAuth.instance;
 
-  void getCurrentUser() async {
+  void getC() async {
     try {
       final user = await _auth.currentUser!;
       if (user != null) {
@@ -96,20 +98,20 @@ class _AgendaAddState extends State<AgendaAdd> {
         DateTime(2019, 08, 1, DateTime.now().hour, DateTime.now().minute),
         [hh, ':', nn, " ", am]).toString();
     super.initState();
-    getCurrentUser();
+    getC();
   }
 
   int index = 0;
 
   //String text;
-  late String note, title;
+  late String  title;
   late DateTime atTime;
 
-  //bool isOn = false;
+
 
   bool _flutter = false;
 
-  // String newDate;
+
 
   @override
   Widget build(BuildContext context) {
@@ -121,7 +123,7 @@ class _AgendaAddState extends State<AgendaAdd> {
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text('Assignments'),
+        title: Text('Attendence'),
         backgroundColor: Colors.blue,
         automaticallyImplyLeading: true,
         //`true` if you want Flutter to automatically add Back Button when needed,
@@ -138,13 +140,13 @@ class _AgendaAddState extends State<AgendaAdd> {
               //  padding: const EdgeInsets.all(16.0),
               primary: Colors.white,
               textStyle:
-                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             onPressed: () async {
               atTime = DateTime(selectedDate.year, selectedDate.month,
                   selectedDate.day, selectedTime.hour, selectedTime.minute);
-              await _firestore.collection('Assignments').add({
-                'note': note,
+              await _firestore.collection('Attendence').add({
+                'value': _flutter,
                 'title': title,
                 'sender': loggedInUser.uid,
                 'date': Timestamp.fromDate(atTime),
@@ -177,7 +179,7 @@ class _AgendaAddState extends State<AgendaAdd> {
                 ),
               ),
               const SizedBox(height: 10),
-              Container(
+              /*    Container(
                 width: _width / 1.7,
                 child: TextField(
                   onChanged: (value) {
@@ -188,7 +190,7 @@ class _AgendaAddState extends State<AgendaAdd> {
                     labelText: "Note",
                   ),
                 ),
-              ),
+              ),*/
               const SizedBox(height: 10),
               // datetime start
 
@@ -202,9 +204,9 @@ class _AgendaAddState extends State<AgendaAdd> {
                     Column(
                       children: <Widget>[
                         Text(
-                          'Choose Due Date',
+                          'Choose Date',
                           style: TextStyle(
-                              // fontStyle: FontStyle.italic,
+                            // fontStyle: FontStyle.italic,
                               fontWeight: FontWeight.w600,
                               letterSpacing: 0.5),
                         ),
@@ -240,9 +242,9 @@ class _AgendaAddState extends State<AgendaAdd> {
                     Column(
                       children: <Widget>[
                         Text(
-                          'Choose Due Time',
+                          'Choose Time',
                           style: TextStyle(
-                              // fontStyle: FontStyle.italic,
+                            // fontStyle: FontStyle.italic,
                               fontWeight: FontWeight.w600,
                               letterSpacing: 0.5),
                         ),
@@ -272,20 +274,48 @@ class _AgendaAddState extends State<AgendaAdd> {
                                   contentPadding: EdgeInsets.all(5)),
                             ),
                           ),
+
                         ),
+
                       ],
                     ),
                   ],
                 ),
               ),
+              Column(
+                children: [
+                  SwitchListTile(
+                    title: Text('JUSTIFICATION',style: TextStyle(
+                        color: Colors.blue,
+                        fontWeight: FontWeight.w800,
+
+                        fontSize: 20
+                    ),
+                    ),
+                    value: _flutter,
+                    activeColor: Colors.lightBlue,
+                    inactiveTrackColor: Colors.grey,
+                    onChanged: (bool value) {
+                      setState(() {
+                        _flutter = value;
+                      });
+                    },
+                  ),
+
+                ],
+              ),
+
 
               // datetime end
             ],
           ),
         ),
       ),
+
     );
   }
 }
 
 // waste
+
+

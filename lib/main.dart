@@ -1,3 +1,4 @@
+import 'package:college_planner_app/pages/grades.dart';
 import 'package:college_planner_app/pages/overviewScreen.dart';
 import 'package:college_planner_app/pages/reset.dart';
 import 'package:college_planner_app/pages/setup_profile_page.dart';
@@ -8,8 +9,9 @@ import 'package:college_planner_app/pages/login_screen.dart';
 import 'package:college_planner_app/pages/registration_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'widgets/timeadd.dart';
-import 'widgets/timetable.dart';
+import 'package:college_planner_app/pages/attendence.dart';
+import 'widgets/Classes_add.dart';
+import 'widgets/Classes.dart';
 import 'pages/agendaq.dart';
 
 void main() async {
@@ -29,8 +31,10 @@ class PlannerApp extends StatelessWidget {
       SetupScreen.id: (context) => SetupScreen(),
       ProfilePage.id: (context) => ProfilePage(),
       ResetScreen.id: (context) => ResetScreen(),
-      Timeadd.id: (context) => Timeadd(),
-      Time.id: (context) => Time(),
+      //ClassesAdd.id: (context) => ClassesAdd(),
+      Classes.id: (context) => Classes(),
+      Attendence.id: (context) => Attendence(),
+      Grade.id: (context) => Grade(),
       Agenda.id: (context) => Agenda(),
     });
   }

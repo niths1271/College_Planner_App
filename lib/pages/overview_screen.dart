@@ -12,8 +12,8 @@ class OverviewScreen extends StatefulWidget {
 
 class _OverviewScreenState extends State<OverviewScreen> {
   final List<String> options = [
-    "TimeTable",
-    "Agenda",
+    "Classes",
+    "Assignments",
     "Calendar",
     "Subjects",
     "Grades",
@@ -42,7 +42,7 @@ class _OverviewScreenState extends State<OverviewScreen> {
               ),
             ),
             ListTile(
-              title: Text("TimeTable"),
+              title: Text("Classes"),
             ),
             ListTile(
               title: Text("Grades"),

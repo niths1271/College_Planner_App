@@ -1,13 +1,17 @@
-import 'package:college_planner_app/pages/attendence.dart';
 import 'package:college_planner_app/pages/overviewScreen.dart';
-import 'package:college_planner_app/pages/attendhome.dart';
-import 'package:college_planner_app/pages/grades.dart';
+
+
 import 'package:college_planner_app/widgets/time_picker_widget.dart';
+
+import 'package:college_planner_app/pages/attendence.dart';
+
+import 'package:college_planner_app/pages/gradeadd.dart';
+
 import 'package:college_planner_app/widgets/Classes.dart';
 //import 'package:college_planner_app/widgets/remainder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-import 'agenda_add.dart';
+import 'gradeadd.dart';
 //import 'exam.dart';
 //import 'home_work.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -17,34 +21,34 @@ import 'package:firebase_core/firebase_core.dart';
 final _firestore = FirebaseFirestore.instance;
 late User loggedInUser;
 
-class Agenda extends StatefulWidget {
-  static String id = '/agenda';
+class Grade extends StatefulWidget {
+  static String id = '/grade';
   @override
-  _AgendaState createState() => _AgendaState();
+  _GradeState createState() => _GradeState();
 }
 
-class _AgendaState extends State<Agenda> {
-  late var agendas = <Widget>[];
+class _GradeState extends State<Grade> {
+  late var grades = <Widget>[];
   final _auth = FirebaseAuth.instance;
 
-  void getAgendas() async {
+  void getGrades() async {
     try {
-      print("inside getagenda try");
+      print("inside getgrade try");
 
-      final snaps = await _firestore.collection('Assignments').get();
+      final snaps = await _firestore.collection('Grades').get();
       for (var docm in snaps.docs) {
         if (docm['sender'] == loggedInUser.uid) {
-          String time = DateTime.fromMillisecondsSinceEpoch(
-                      docm['date'].seconds * 1000)
-                  .toString()
-                  .substring(0, 10) +
+          /*String time = DateTime.fromMillisecondsSinceEpoch(
+              docm['date'].seconds * 1000)
+              .toString()
+              .substring(0, 10) +
               " at " +
               DateTime.fromMillisecondsSinceEpoch(docm['date'].seconds * 1000)
                   .toString()
-                  .substring(11, 16);
+                  .substring(11, 16);*/
           print("adding");
           print(docm['title']);
-          var agenda = Container(
+          var grade = Container(
             color: Colors.transparent,
             margin: EdgeInsets.all(4.0),
             padding: EdgeInsets.all(4.0),
@@ -70,11 +74,15 @@ class _AgendaState extends State<Agenda> {
                     children: [
                       ListTile(
                         title: Text(
-                          docm['note'],
+                          docm['grade'],
                         ),
-                        subtitle: Text(
-                          time,
-                        ),
+                         subtitle: Text(
+                           docm['dropdownColor'],
+
+                          ),
+
+
+
                       ),
                     ],
                   ),
@@ -84,7 +92,7 @@ class _AgendaState extends State<Agenda> {
           );
 
           setState(() {
-            agendas.add(agenda);
+            grades.add(grade);
           });
         }
       }
@@ -110,7 +118,7 @@ class _AgendaState extends State<Agenda> {
     // TODO: implement initState
     super.initState();
     getCurrentUser();
-    getAgendas();
+    getGrades();
   }
 
   int navIndex = 0;
@@ -120,7 +128,7 @@ class _AgendaState extends State<Agenda> {
       home: Scaffold(
         //backgroundColor: Colors.white,
         appBar: AppBar(
-          title: Text('Assignments'),
+          title: Text('Grades'),
           backgroundColor: Colors.blueAccent,
         ),
         drawer: Theme(
@@ -140,7 +148,7 @@ class _AgendaState extends State<Agenda> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
-              children: agendas,
+              children: grades,
             ),
           ),
         ),
@@ -161,8 +169,8 @@ class _AgendaState extends State<Agenda> {
             overlayColor: Colors.black,
             onPress: () async {
               await Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => AgendaAdd()));
-              getAgendas();
+                  context, MaterialPageRoute(builder: (_) => GradeAdd()));
+              getGrades();
             }),
       ),
     );
@@ -192,31 +200,31 @@ class Sidenav extends StatelessWidget {
                 '',
                 style: TextStyle(fontWeight: FontWeight.w500),
               ), onTap: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => OverviewScreen()));
-          }, selected: selectedIndex == 1),
-          _navItem(context, Icons.bookmark, 'Assignments',
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => OverviewScreen()));
+              }, selected: selectedIndex == 1),
+          _navItem(context, Icons.bookmark, 'Grades',
               suffix: Text(
                 '',
                 style: TextStyle(fontWeight: FontWeight.w500),
               ), onTap: () {
-            _navItemClicked(context, 2);
-          }, selected: selectedIndex == 2),
+                _navItemClicked(context, 2);
+              }, selected: selectedIndex == 2),
           _navItem(context, Icons.calendar_today, 'Calendar',
               suffix: Text(
                 '',
                 style: TextStyle(fontWeight: FontWeight.w500),
               ), onTap: () {
-            _navItemClicked(context, 3);
-          }, selected: selectedIndex == 3),
+                _navItemClicked(context, 3);
+              }, selected: selectedIndex == 3),
           _navItem(context, Icons.pending_actions, 'Classes',
               suffix: Text(
                 '',
                 style: TextStyle(fontWeight: FontWeight.w500),
               ), onTap: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => Classes()));
-          }, selected: selectedIndex == 4),
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => Classes()));
+              }, selected: selectedIndex == 4),
           Divider(color: Colors.grey.shade400),
           _navItem(
             context,
@@ -235,7 +243,7 @@ class Sidenav extends StatelessWidget {
             'Attendance',
             onTap: () {
               Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Attendence()));
+                  context, MaterialPageRoute(builder: (context) => Grade()));
             },
             selected: selectedIndex == 6,
             suffix: Text(""),
@@ -277,9 +285,9 @@ class Sidenav extends StatelessWidget {
   }
 
   _navItem(BuildContext context, IconData icon, String text,
-          {required Text suffix,
-          required Function() onTap,
-          bool selected = false}) =>
+      {required Text suffix,
+        required Function() onTap,
+        bool selected = false}) =>
       Container(
         color: selected ? Colors.grey.shade300 : Colors.transparent,
         child: ListTile(
@@ -297,5 +305,3 @@ class Sidenav extends StatelessWidget {
     Navigator.of(context).pop();
   }
 }
-
-// waste
