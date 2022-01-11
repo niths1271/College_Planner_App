@@ -133,6 +133,8 @@ class _SetupScreenState extends State<SetupScreen> {
                splashColor: Colors.blue.withAlpha(30),
                onTap: () async {
                  await showInformationDialog(context,i);
+                 setState(() {
+                 });
                },
                child: Column(
                  mainAxisSize: MainAxisSize.min,
