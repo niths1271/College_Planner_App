@@ -175,6 +175,7 @@ class _AgendaState extends State<Agenda> {
             onPress: () async {
               await Navigator.push(
                   context, MaterialPageRoute(builder: (_) => AgendaAdd()));
+              agendas.clear();
               getAgendas();
             }),
       ),
