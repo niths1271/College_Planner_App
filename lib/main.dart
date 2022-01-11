@@ -13,6 +13,7 @@ import 'package:college_planner_app/pages/attendence.dart';
 import 'widgets/Classes_add.dart';
 import 'widgets/Classes.dart';
 import 'pages/agendaq.dart';
+import 'pages/display_profile.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,6 +37,7 @@ class PlannerApp extends StatelessWidget {
       Attendence.id: (context) => Attendence(),
       Grade.id: (context) => Grade(),
       Agenda.id: (context) => Agenda(),
+      DispProfile.id: (context) => DispProfile(),
     });
   }
 }
