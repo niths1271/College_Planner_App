@@ -1199,13 +1199,13 @@ class Sidenav extends StatelessWidget {
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => Agenda()));
           }, selected: selectedIndex == 2),
-          _navItem(context, Icons.calendar_today, 'Calendar',
+       /*   _navItem(context, Icons.calendar_today, 'Calendar',
               suffix: Text(
                 '',
                 style: TextStyle(fontWeight: FontWeight.w500),
               ), onTap: () {
             _navItemClicked(context, 3);
-          }, selected: selectedIndex == 3),
+          }, selected: selectedIndex == 3),*/
           _navItem(context, Icons.pending_actions, 'Classes',
               suffix: Text(
                 '',
@@ -1214,7 +1214,7 @@ class Sidenav extends StatelessWidget {
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => Classes()));
           }, selected: selectedIndex == 4),
-          Divider(color: Colors.grey.shade400),
+       //   Divider(color: Colors.grey.shade400),
           _navItem(
             context,
             Icons.emoji_events,
@@ -1237,7 +1237,7 @@ class Sidenav extends StatelessWidget {
             selected: selectedIndex == 6,
             suffix: Text(""),
           ),
-          _navItem(
+        /*  _navItem(
             context,
             Icons.school,
             'Subjects',
@@ -1269,7 +1269,7 @@ class Sidenav extends StatelessWidget {
             },
             selected: selectedIndex == 9,
             suffix: Text(""),
-          ),
+          ),*/
         ],
       ),
     );
