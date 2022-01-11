@@ -6,12 +6,7 @@ import 'package:college_planner_app/widgets/header_container.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-
 import 'login_screen.dart';
-
-// final RegExp emailRegex = new RegExp(
-//     r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$");
-
 
 class RegistrationScreen extends StatefulWidget {
   static String id = '/registration';

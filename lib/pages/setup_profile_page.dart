@@ -185,7 +185,7 @@ class _ProfilePageState extends State<ProfilePage> with InputValidationMixin {
                                         if (validateName(name!))
                                           return null;
                                         else
-                                          return 'Enter a valid email address';
+                                          return 'Enter a valid name';
                                       },
                                       decoration: const InputDecoration(
                                         hintText: "Enter Your Name",

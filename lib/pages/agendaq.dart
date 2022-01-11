@@ -4,10 +4,12 @@ import 'package:college_planner_app/pages/attendhome.dart';
 import 'package:college_planner_app/pages/grades.dart';
 import 'package:college_planner_app/widgets/time_picker_widget.dart';
 import 'package:college_planner_app/widgets/Classes.dart';
+
 //import 'package:college_planner_app/widgets/remainder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'agenda_add.dart';
+
 //import 'exam.dart';
 //import 'home_work.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -19,6 +21,7 @@ late User loggedInUser;
 
 class Agenda extends StatefulWidget {
   static String id = '/agenda';
+
   @override
   _AgendaState createState() => _AgendaState();
 }
@@ -114,6 +117,7 @@ class _AgendaState extends State<Agenda> {
   }
 
   int navIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -140,7 +144,16 @@ class _AgendaState extends State<Agenda> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
-              children: agendas,
+              children: agendas.length > 0
+                  ? agendas
+                  : [
+                      Text("No due assignments",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 25,
+                            color: Colors.grey,
+                          )),
+                    ],
             ),
           ),
         ),
@@ -234,8 +247,8 @@ class Sidenav extends StatelessWidget {
             Icons.event_available,
             'Attendance',
             onTap: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Attendence()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => Attendence()));
             },
             selected: selectedIndex == 6,
             suffix: Text(""),
