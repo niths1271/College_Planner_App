@@ -138,12 +138,12 @@ class _ClassesAddState extends State<ClassesAdd> {
               //  padding: const EdgeInsets.all(16.0),
               primary: Colors.white,
               textStyle:
-              const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             onPressed: () async {
               atTime = DateTime(selectedDate.year, selectedDate.month,
                   selectedDate.day, selectedTime.hour, selectedTime.minute);
-              await _firestore.collection('Classes').add({
+              await _firestore.collection('TimeTable').add({
                 'note': note,
                 'title': title,
                 'sender': loggedInUser.uid,
@@ -204,7 +204,7 @@ class _ClassesAddState extends State<ClassesAdd> {
                         Text(
                           'Choose Date',
                           style: TextStyle(
-                            // fontStyle: FontStyle.italic,
+                              // fontStyle: FontStyle.italic,
                               fontWeight: FontWeight.w600,
                               letterSpacing: 0.5),
                         ),
@@ -242,7 +242,7 @@ class _ClassesAddState extends State<ClassesAdd> {
                         Text(
                           'Choose Time',
                           style: TextStyle(
-                            // fontStyle: FontStyle.italic,
+                              // fontStyle: FontStyle.italic,
                               fontWeight: FontWeight.w600,
                               letterSpacing: 0.5),
                         ),

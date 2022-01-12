@@ -31,13 +31,13 @@ class _ClassesState extends State<Classes> {
     try {
       print("inside getClasses try");
 
-      final snaps = await _firestore.collection('Classes').get();
+      final snaps = await _firestore.collection('TimeTable').get();
       for (var docm in snaps.docs) {
         if (docm['sender'] == loggedInUser.uid) {
           String time = DateTime.fromMillisecondsSinceEpoch(
-              docm['date'].seconds * 1000)
-              .toString()
-              .substring(0, 10) +
+                      docm['date'].seconds * 1000)
+                  .toString()
+                  .substring(0, 10) +
               " at " +
               DateTime.fromMillisecondsSinceEpoch(docm['date'].seconds * 1000)
                   .toString()
@@ -140,19 +140,16 @@ class _ClassesState extends State<Classes> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
-              children:  classess.length>0
+              children: classess.length > 0
                   ? classess
-                  :[
-                Text("No classes",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 25,
-                      color: Colors.grey,
-
-                    )),
-              ],
-
-
+                  : [
+                      Text("No classes",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 25,
+                            color: Colors.grey,
+                          )),
+                    ],
             ),
           ),
         ),
@@ -204,17 +201,17 @@ class Sidenav extends StatelessWidget {
                 '',
                 style: TextStyle(fontWeight: FontWeight.w500),
               ), onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => OverviewScreen()));
-              }, selected: selectedIndex == 1),
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => OverviewScreen()));
+          }, selected: selectedIndex == 1),
           _navItem(context, Icons.bookmark, 'Assignments',
               suffix: Text(
                 '',
                 style: TextStyle(fontWeight: FontWeight.w500),
               ), onTap: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => Agenda()));
-              }, selected: selectedIndex == 2),
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => Agenda()));
+          }, selected: selectedIndex == 2),
           /*_navItem(context, Icons.calendar_today, 'Calendar',
               suffix: Text(
                 '',
@@ -227,9 +224,9 @@ class Sidenav extends StatelessWidget {
                 '',
                 style: TextStyle(fontWeight: FontWeight.w500),
               ), onTap: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => Classes()));
-              }, selected: selectedIndex == 4),
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => Classes()));
+          }, selected: selectedIndex == 4),
           //  Divider(color: Colors.grey.shade400),
           _navItem(
             context,
@@ -290,9 +287,9 @@ class Sidenav extends StatelessWidget {
   }
 
   _navItem(BuildContext context, IconData icon, String text,
-      {required Text suffix,
-        required Function() onTap,
-        bool selected = false}) =>
+          {required Text suffix,
+          required Function() onTap,
+          bool selected = false}) =>
       Container(
         color: selected ? Colors.grey.shade300 : Colors.transparent,
         child: ListTile(
