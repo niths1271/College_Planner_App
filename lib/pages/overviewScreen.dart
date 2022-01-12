@@ -13,6 +13,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'agenda_add.dart';
 import 'agendaq.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'display_profile.dart';
 
 // hi bro hey
 // import { collection, query, where, getDocs } from "firebase/firestore";
@@ -67,11 +68,12 @@ class _OverviewScreenState extends State<OverviewScreen> {
     int numEvents = 0;
     try {
       print("inside event");
-      final snaps = await _firestore.collection('Asssignments').get();
+      final snaps = await _firestore.collection('Assignments').get();
       // await for (var snapshot in _firestore.collection('Assignments').snapshots()) {
       // numEvents = snaps.docs.length;
       for (var docm in snaps.docs) {
         if (docm['sender'] == loggedInUser.uid) {
+          print("user match!!");
           numEvents++;
           print(docm['date']);
           if (DateTime.fromMillisecondsSinceEpoch(docm['date'].seconds * 1000)
@@ -818,7 +820,7 @@ class NoTodayClasses extends StatelessWidget {
           borderRadius: BorderRadius.circular(8.0),
         ),
         // width: size.width,
-        height: 440.0,
+        height: 470.0,
         child: Column(
           children: [
             ListTile(
@@ -851,8 +853,8 @@ class NoTodayClasses extends StatelessWidget {
                   ),
                 ),
               ),
-              subtitle: Text(
-                  'You can always add new classes from the Classes menu'),
+              subtitle:
+                  Text('You can always add new classes from the Classes menu'),
             ),
             Padding(
               padding: EdgeInsets.symmetric(
@@ -868,11 +870,17 @@ class NoTodayClasses extends StatelessWidget {
                   Icons.arrow_forward,
                   color: Colors.black54,
                 ),
-                title: Text(
-                  'Show more',
-                  style: TextStyle(
-                    // fontWeight: FontWeight.bold,
-                    color: Colors.black54,
+                title: GestureDetector(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Agenda()));
+                  },
+                  child: Text(
+                    'Show more',
+                    style: TextStyle(
+                      // fontWeight: FontWeight.bold,
+                      color: Colors.black54,
+                    ),
                   ),
                 ),
               ),
@@ -1043,7 +1051,7 @@ class NoEvents extends StatelessWidget {
           borderRadius: BorderRadius.circular(8.0),
         ),
         // width: size.width,
-        height: 420.0,
+        height: 460.0,
         child: Column(
           children: [
             ListTile(
@@ -1076,7 +1084,8 @@ class NoEvents extends StatelessWidget {
                   ),
                 ),
               ),
-              subtitle: Text('You can always add new assignments in the Assignments tab'),
+              subtitle: Text(
+                  'You can always add new assignments in the Assignments tab'),
             ),
             Padding(
               padding: EdgeInsets.symmetric(
@@ -1091,11 +1100,17 @@ class NoEvents extends StatelessWidget {
                 Icons.arrow_forward,
                 color: Colors.black54,
               ),
-              title: Text(
-                'Show more',
-                style: TextStyle(
-                  // fontWeight: FontWeight.bold,
-                  color: Colors.black54,
+              title: GestureDetector(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Agenda()));
+                },
+                child: Text(
+                  'Show more',
+                  style: TextStyle(
+                    // fontWeight: FontWeight.bold,
+                    color: Colors.black54,
+                  ),
                 ),
               ),
             ),
@@ -1114,29 +1129,35 @@ Widget Options(Size size) {
         scrollDirection: Axis.horizontal,
         itemCount: options.length,
         itemBuilder: (context, index) {
-          return Container(
-            height: size.height / 16,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              border: Border.all(
-                width: 1,
-                color: Color.fromRGBO(150, 151, 153, 1),
+          return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Agenda()));
+            },
+            child: Container(
+              height: size.height / 16,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(
+                  width: 1,
+                  color: Color.fromRGBO(150, 151, 153, 1),
+                ),
               ),
-            ),
-            padding: EdgeInsets.symmetric(
-              vertical: 4,
-              horizontal: 8,
-            ),
-            margin: EdgeInsets.symmetric(
-              vertical: 6,
-              horizontal: 8,
-            ),
-            child: Text(
-              options[index],
-              style: TextStyle(
-                color: Colors.black54,
-                fontWeight: FontWeight.bold,
+              padding: EdgeInsets.symmetric(
+                vertical: 4,
+                horizontal: 8,
+              ),
+              margin: EdgeInsets.symmetric(
+                vertical: 6,
+                horizontal: 8,
+              ),
+              child: Text(
+                options[index],
+                style: TextStyle(
+                  color: Colors.black54,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           );
@@ -1178,13 +1199,13 @@ class Sidenav extends StatelessWidget {
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => Agenda()));
           }, selected: selectedIndex == 2),
-          _navItem(context, Icons.calendar_today, 'Calendar',
+       /*   _navItem(context, Icons.calendar_today, 'Calendar',
               suffix: Text(
                 '',
                 style: TextStyle(fontWeight: FontWeight.w500),
               ), onTap: () {
             _navItemClicked(context, 3);
-          }, selected: selectedIndex == 3),
+          }, selected: selectedIndex == 3),*/
           _navItem(context, Icons.pending_actions, 'Classes',
               suffix: Text(
                 '',
@@ -1193,7 +1214,7 @@ class Sidenav extends StatelessWidget {
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => Classes()));
           }, selected: selectedIndex == 4),
-          Divider(color: Colors.grey.shade400),
+       //   Divider(color: Colors.grey.shade400),
           _navItem(
             context,
             Icons.emoji_events,
@@ -1212,12 +1233,11 @@ class Sidenav extends StatelessWidget {
             onTap: () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => Attendence()));
-
             },
             selected: selectedIndex == 6,
             suffix: Text(""),
           ),
-          _navItem(
+        /*  _navItem(
             context,
             Icons.school,
             'Subjects',
@@ -1227,27 +1247,29 @@ class Sidenav extends StatelessWidget {
             selected: selectedIndex == 7,
             suffix: Text(""),
           ),
-          _navItem(
-            context,
-            Icons.person,
-            'Teachers',
-            onTap: () {
-              _navItemClicked(context, 8);
-            },
-            selected: selectedIndex == 8,
-            suffix: Text(""),
-          ),
+          // _navItem(
+          //   context,
+          //   Icons.person,
+          //   'Teachers',
+          //   onTap: () {
+          //     _navItemClicked(context, 8);
+          //   },
+          //   selected: selectedIndex == 8,
+          //   suffix: Text(""),
+          // ),
           Divider(color: Colors.grey.shade400),
           _navItem(
             context,
-            Icons.settings,
-            'Settings',
+            Icons.person,
+            'Profile',
             onTap: () {
-              _navItemClicked(context, 9);
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => DispProfile()));
+              // _navItemClicked(context, 9);
             },
             selected: selectedIndex == 9,
             suffix: Text(""),
-          ),
+          ),*/
         ],
       ),
     );

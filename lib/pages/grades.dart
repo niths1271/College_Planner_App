@@ -1,3 +1,4 @@
+import 'package:college_planner_app/pages/agendaq.dart';
 import 'package:college_planner_app/pages/overviewScreen.dart';
 
 
@@ -76,10 +77,10 @@ class _GradeState extends State<Grade> {
                         title: Text(
                           docm['grade'],
                         ),
-                         subtitle: Text(
-                           docm['dropdownColor'],
+                        subtitle: Text(
+                          docm['dropdownColor'],
 
-                          ),
+                        ),
 
 
 
@@ -148,7 +149,19 @@ class _GradeState extends State<Grade> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
-              children: grades,
+              children:  grades.length>0
+                  ? grades
+                  :[
+                Text("No Grades",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 25,
+                      color: Colors.grey,
+
+                    )),
+              ],
+
+
             ),
           ),
         ),
@@ -203,20 +216,22 @@ class Sidenav extends StatelessWidget {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => OverviewScreen()));
               }, selected: selectedIndex == 1),
-          _navItem(context, Icons.bookmark, 'Grades',
+          _navItem(context, Icons.bookmark, 'Assignments',
               suffix: Text(
                 '',
                 style: TextStyle(fontWeight: FontWeight.w500),
               ), onTap: () {
-                _navItemClicked(context, 2);
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) =>Agenda ()));
+
               }, selected: selectedIndex == 2),
-          _navItem(context, Icons.calendar_today, 'Calendar',
+          /*  _navItem(context, Icons.calendar_today, 'Calendar',
               suffix: Text(
                 '',
                 style: TextStyle(fontWeight: FontWeight.w500),
               ), onTap: () {
                 _navItemClicked(context, 3);
-              }, selected: selectedIndex == 3),
+              }, selected: selectedIndex == 3),*/
           _navItem(context, Icons.pending_actions, 'Classes',
               suffix: Text(
                 '',
@@ -225,7 +240,7 @@ class Sidenav extends StatelessWidget {
                 Navigator.push(
                     context, MaterialPageRoute(builder: (context) => Classes()));
               }, selected: selectedIndex == 4),
-          Divider(color: Colors.grey.shade400),
+          //  Divider(color: Colors.grey.shade400),
           _navItem(
             context,
             Icons.emoji_events,
@@ -243,12 +258,12 @@ class Sidenav extends StatelessWidget {
             'Attendance',
             onTap: () {
               Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Grade()));
+                  context, MaterialPageRoute(builder: (context) => Attendence()));
             },
             selected: selectedIndex == 6,
             suffix: Text(""),
           ),
-          _navItem(
+          /* _navItem(
             context,
             Icons.school,
             'Subjects',
@@ -278,7 +293,7 @@ class Sidenav extends StatelessWidget {
             },
             selected: selectedIndex == 9,
             suffix: Text(""),
-          ),
+          ),*/
         ],
       ),
     );

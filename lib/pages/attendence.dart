@@ -156,7 +156,18 @@ class _AttendenceState extends State<Attendence> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
-              children: Attendences,
+              children:  Attendences.length>0
+                  ?  Attendences
+                  :[
+                Text("No Attendence",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 25,
+                      color: Colors.grey,
+
+                    )),
+              ],
+
             ),
           ),
         ),
@@ -213,7 +224,7 @@ class Sidenav extends StatelessWidget {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => OverviewScreen()));
               }, selected: selectedIndex == 1),
-          _navItem(context, Icons.bookmark, 'Agenda',
+          _navItem(context, Icons.bookmark, 'Assignments',
               suffix: Text(
                 '',
                 style: TextStyle(fontWeight: FontWeight.w500),
@@ -223,14 +234,14 @@ class Sidenav extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => Agenda()));
               },
               selected: selectedIndex == 2),
-          _navItem(context, Icons.calendar_today, 'Calendar',
+          /* _navItem(context, Icons.calendar_today, 'Calendar',
               suffix: Text(
                 '',
                 style: TextStyle(fontWeight: FontWeight.w500),
               ), onTap: () {
                 _navItemClicked(context, 3);
-              }, selected: selectedIndex == 3),
-          _navItem(context, Icons.pending_actions, 'Timetable',
+              }, selected: selectedIndex == 3),*/
+          _navItem(context, Icons.pending_actions, 'Classes',
               suffix: Text(
                 '',
                 style: TextStyle(fontWeight: FontWeight.w500),
@@ -238,7 +249,7 @@ class Sidenav extends StatelessWidget {
                 Navigator.push(
                     context, MaterialPageRoute(builder: (context) =>  Classes()));
               }, selected: selectedIndex == 4),
-          Divider(color: Colors.grey.shade400),
+          // Divider(color: Colors.grey.shade400),
           _navItem(
             context,
             Icons.emoji_events,
@@ -260,7 +271,7 @@ class Sidenav extends StatelessWidget {
             selected: selectedIndex == 6,
             suffix: Text(""),
           ),
-          _navItem(
+          /*  _navItem(
             context,
             Icons.school,
             'Subjects',
@@ -290,7 +301,7 @@ class Sidenav extends StatelessWidget {
             },
             selected: selectedIndex == 9,
             suffix: Text(""),
-          ),
+          ),*/
         ],
       ),
     );
