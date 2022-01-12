@@ -29,6 +29,7 @@ class _ClassesState extends State<Classes> {
 
   void getClassess() async {
     try {
+      classess.clear();
       print("inside getClasses try");
 
       final snaps = await _firestore.collection('Classes').get();
