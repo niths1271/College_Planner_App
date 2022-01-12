@@ -143,7 +143,7 @@ class _ClassesAddState extends State<ClassesAdd> {
             onPressed: () async {
               atTime = DateTime(selectedDate.year, selectedDate.month,
                   selectedDate.day, selectedTime.hour, selectedTime.minute);
-              await _firestore.collection('TimeTable').add({
+              await _firestore.collection('Classes').add({
                 'note': note,
                 'title': title,
                 'sender': loggedInUser.uid,
