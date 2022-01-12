@@ -32,6 +32,18 @@ const spinkit = SpinKitRing(
   size: 50.0,
 );
 
+void clearAll() {
+  todayClasses.clear();
+  tomorrowClasses.clear();
+  oneClasses.clear();
+  twoClasses.clear();
+  threeClasses.clear();
+  fourClasses.clear();
+  fiveClasses.clear();
+  todayEvents.clear();
+  tomorrowEvents.clear();
+}
+
 var todayEvents = [], tomorrowEvents = [];
 //aa
 final List<String> options = [
@@ -229,6 +241,7 @@ class _OverviewScreenState extends State<OverviewScreen> {
 
   int numTotalEvents = 0;
   void getCandE() async {
+    clearAll();
     print("calling 1");
     numTotalEvents += await getEvents();
     print("calling 2");
