@@ -29,9 +29,10 @@ class _ClassesState extends State<Classes> {
 
   void getClassess() async {
     try {
+      classess.clear();
       print("inside getClasses try");
 
-      final snaps = await _firestore.collection('TimeTable').get();
+      final snaps = await _firestore.collection('Classes').get();
       for (var docm in snaps.docs) {
         if (docm['sender'] == loggedInUser.uid) {
           String time = DateTime.fromMillisecondsSinceEpoch(
